@@ -1,15 +1,6 @@
 #Reset to origional state
 
 
-if [ "$3" != "-s" ]; then
-    echo "Performing cleanup."
-    git reset --hard
-    git clean -fxd
-
-else
-    echo "Skipping cleanup."
-fi
-
 
 CC='gcc-5' CXX='g++-5' ./waf configure
 
@@ -18,3 +9,14 @@ python run.py --cc poseidon --trace $1 --bw 100 --topo $2 --poseidon_m 0.25 --po
 cd results
 
 python draw.py
+
+echo "Perform cleanup (revert to last commit, deleting changes)? (Y/N)"
+read answer
+
+if [ "$answer" == "y" ]; then
+    echo "Performing cleanup."
+    git reset --hard
+    git clean -fxd
+else
+    echo "Skipping the cleanup."
+fi
