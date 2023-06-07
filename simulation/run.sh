@@ -17,6 +17,7 @@ if [ "$answer" == "y" ]; then
     echo "Performing cleanup."
     git reset --hard
     git clean -fxd
+    sleep 5s
     git reset --hard
     git clean -fxd
 else
