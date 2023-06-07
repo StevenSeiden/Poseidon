@@ -3,7 +3,7 @@
 
 if [ "$3" != "-s" ]; then
     echo "Performing cleanup."
-    git reset -–hard
+    git reset --hard
     git clean -fxd
 
 else
