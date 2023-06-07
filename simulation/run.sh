@@ -10,11 +10,13 @@ cd results
 
 python draw.py
 
-echo "Perform cleanup (revert to last commit, deleting changes)? (Y/N)"
+echo "Perform cleanup (revert to last commit, deleting changes)? (y/n)"
 read answer
 
 if [ "$answer" == "y" ]; then
     echo "Performing cleanup."
+    git reset --hard
+    git clean -fxd
     git reset --hard
     git clean -fxd
 else
