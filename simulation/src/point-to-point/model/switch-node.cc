@@ -220,11 +220,12 @@ void SwitchNode::SwitchNotifyDequeue(uint32_t ifIndex, uint32_t qIndex, Ptr<Pack
 		if (buf[PppHeader::GetStaticSize() + 9] == 0x11){ // udp packet
 			IntHeader *ih = (IntHeader*)&buf[PppHeader::GetStaticSize() + 20 + 8 + 6]; // ppp, ip, udp, SeqTs, INT
 			Ptr<QbbNetDevice> dev = DynamicCast<QbbNetDevice>(m_devices[ifIndex]);
-			if (m_ccMode == 3 || m_ccMode == 11){ // HPCC and Poseidon
+			if Ipv4Header h;
+				p->PeekHeader(h);
 
 
 				// TODO: Try changing based on IP address as seen below
-				if((Ipv4Header::EcnType)0x03 == 0x0b000001){
+				if(h.GetSource().Get() == 0x0b000001){
 					std::cout << "Working!";
 					ih->PushHop(
 					
