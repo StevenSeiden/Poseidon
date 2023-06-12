@@ -224,7 +224,26 @@ void SwitchNode::SwitchNotifyDequeue(uint32_t ifIndex, uint32_t qIndex, Ptr<Pack
 
 
 				// TODO: Try changing based on IP address as seen below
-				ih->PushHop(Simulator::Now().GetTimeStep(), m_txBytes[ifIndex], dev->GetQueue()->GetNBytesTotal(), dev->GetDataRate().GetBitRate());
+				if((Ipv4Header::EcnType)0x03 == 0x0b000001){
+					std::cout << "Working!";
+					ih->PushHop(
+					
+					Simulator::Now().GetTimeStep(), 
+					m_txBytes[ifIndex], 
+					dev->GetQueue()->GetNBytesTotal(), 
+					dev->GetDataRate().GetBitRate()*2
+					
+					);
+				} else{
+				ih->PushHop(
+					
+					Simulator::Now().GetTimeStep(), 
+					m_txBytes[ifIndex], 
+					dev->GetQueue()->GetNBytesTotal(), 
+					dev->GetDataRate().GetBitRate()
+					
+					);
+				}
 			}else if (m_ccMode == 10){ // HPCC-PINT
 				uint64_t t = Simulator::Now().GetTimeStep();
 				uint64_t dt = t - m_lastPktTs[ifIndex];

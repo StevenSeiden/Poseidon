@@ -802,7 +802,8 @@ void RdmaHw::HandleAckPoseidon(Ptr<RdmaQueuePair> qp, Ptr<Packet> p, CustomHeade
 		// TODO: Changes to reporting half rate for specific IP. Probably will give the flow more bandwidth.
 		double mpt = CalculateTarget(qp->poseidon.m_curRate, m_poseidon_min_rate, m_poseidon_max_rate);
 
-		if (qp->sip.Get() == 0x0b000001) {
+		//Disabling for now
+		if (false && qp->sip.Get() == 0x0b000001) {
 			mpt = CalculateTarget(qp->poseidon.m_curRate/2, m_poseidon_min_rate, m_poseidon_max_rate);
 		} 
 
