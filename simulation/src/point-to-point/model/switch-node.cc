@@ -224,10 +224,14 @@ void SwitchNode::SwitchNotifyDequeue(uint32_t ifIndex, uint32_t qIndex, Ptr<Pack
 
 			//TODO: Modify GetNBytesTotal below to manipulate switch
 			ih->PushHop(Simulator::Now().GetTimeStep(), m_txBytes[ifIndex], dev->GetQueue()->GetNBytesTotal(), dev->GetDataRate().GetBitRate());
+			PppHeader ppp;
 			Ipv4Header h;
+			p->RemoveHeader(ppp);
 			p->PeekHeader(h);
+			p->AddHeader(ppp);
 
-			if(h.GetSource().Get() == 0x0b000001){
+
+			if(h.GetSource().Get() == 0){
 				ih->PushHop(Simulator::Now().GetTimeStep(), m_txBytes[ifIndex], dev->GetQueue()->GetNBytesTotal()*2, dev->GetDataRate().GetBitRate());
 			}
 
