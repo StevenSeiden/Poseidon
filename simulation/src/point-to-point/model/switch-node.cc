@@ -223,7 +223,14 @@ void SwitchNode::SwitchNotifyDequeue(uint32_t ifIndex, uint32_t qIndex, Ptr<Pack
 			if (m_ccMode == 3 || m_ccMode == 11){ // HPCC and Poseidon
 
 			//TODO: Modify GetNBytesTotal below to manipulate switch
-				ih->PushHop(Simulator::Now().GetTimeStep(), m_txBytes[ifIndex], dev->GetQueue()->GetNBytesTotal(), dev->GetDataRate().GetBitRate());
+			ih->PushHop(Simulator::Now().GetTimeStep(), m_txBytes[ifIndex], dev->GetQueue()->GetNBytesTotal(), dev->GetDataRate().GetBitRate());
+			Ipv4Header h;
+			p->PeekHeader(h);
+
+			if(h.GetSource().Get() == 0x0b000001){
+				ih->PushHop(Simulator::Now().GetTimeStep(), m_txBytes[ifIndex], dev->GetQueue()->GetNBytesTotal()*2, dev->GetDataRate().GetBitRate());
+			}
+
 			}else if (m_ccMode == 10){ // HPCC-PINT
 				uint64_t t = Simulator::Now().GetTimeStep();
 				uint64_t dt = t - m_lastPktTs[ifIndex];
