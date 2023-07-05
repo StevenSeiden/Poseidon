@@ -803,9 +803,9 @@ void RdmaHw::HandleAckPoseidon(Ptr<RdmaQueuePair> qp, Ptr<Packet> p, CustomHeade
 		double mpt = CalculateTarget(qp->poseidon.m_curRate, m_poseidon_min_rate, m_poseidon_max_rate);
 
 		//Disabling for now
-		if (false && qp->sip.Get() == 0x0b000001) {
-			mpt = CalculateTarget(qp->poseidon.m_curRate/2, m_poseidon_min_rate, m_poseidon_max_rate);
-		} 
+		//if (qp->sip.Get() == 0x0b000001) {
+		//	mpt = CalculateTarget(qp->poseidon.m_curRate/2, m_poseidon_min_rate, m_poseidon_max_rate);
+		//} 
 
 		double queue_length_total = 0.0;
 
@@ -915,7 +915,7 @@ void RdmaHw::HandleAckPoseidon(Ptr<RdmaQueuePair> qp, Ptr<Packet> p, CustomHeade
 			qp->poseidon.m_curRate = new_rate;
 
 			if (read) {
-				printf("Rate: %lu %08x %.10lf\n", Simulator::Now().GetTimeStep(), qp->sip.Get(), new_rate.GetBitRate()*1e-9);
+				printf("Rate: %lu %08x %.10lf\n\n", Simulator::Now().GetTimeStep(), qp->sip.Get(), new_rate.GetBitRate()*1e-9);
 			}
 		}
 		if (next_seq > qp->poseidon.m_lastUpdateSeq)

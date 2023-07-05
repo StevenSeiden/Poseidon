@@ -35,9 +35,9 @@ Example usage:
 `python run.py --cc poseidon --trace trace_multi_hop_congestion_small --bw 100 --topo topo_racks --poseidon_m 0.25 --poseidon_min_rate 1.0 > ./results/data/poseidon_0.25_1.0.txt`
 
 ### Plot results
-The `draw.py` will plot the essential results for Poseidon, including the evolving of rate, queue length, and mpd signal along with time. 
+The `draw.py` will plot the essential results for Poseidon, including the evolution of rate, queue length, and mpd signal along with time. 
 
-### Exmaples
+### Examples
 ```
 sh batch.sh
 python ./results/draw.py

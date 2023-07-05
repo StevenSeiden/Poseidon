@@ -6,11 +6,17 @@ CC='gcc-5' CXX='g++-5' ./waf configure
 
 python run.py --cc poseidon --trace $1 --bw 100 --topo $2 --poseidon_m 0.25 --poseidon_min_rate 1.0 > ./results/data/$1-$2.txt
 
+echo "\033[A                             \033[A"
+
+echo "Drawing..."
+
 cd results
 
 python draw.py
 
 cd ..
+
+echo "Done."
 
 echo "Perform cleanup (deleting changes and results)? (y/n)"
 read answer

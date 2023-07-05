@@ -216,24 +216,34 @@ void SwitchNode::SwitchNotifyDequeue(uint32_t ifIndex, uint32_t qIndex, Ptr<Pack
 		CheckAndSendResume(inDev, qIndex);
 	}
 	if (1){
+		Ipv4Header h;
+		PppHeader ppp;
+		p->RemoveHeader(ppp);
+		p->PeekHeader(h);
+		p->AddHeader(ppp);
 		uint8_t* buf = p->GetBuffer();
 		if (buf[PppHeader::GetStaticSize() + 9] == 0x11){ // udp packet
+			//Ipv4Header *h = (Ipv4Header*)&buf[PppHeader::GetStaticSize()];
+
 			IntHeader *ih = (IntHeader*)&buf[PppHeader::GetStaticSize() + 20 + 8 + 6]; // ppp, ip, udp, SeqTs, INT
 			Ptr<QbbNetDevice> dev = DynamicCast<QbbNetDevice>(m_devices[ifIndex]);
 			if (m_ccMode == 3 || m_ccMode == 11){ // HPCC and Poseidon
 
 			//TODO: Modify GetNBytesTotal below to manipulate switch
-			ih->PushHop(Simulator::Now().GetTimeStep(), m_txBytes[ifIndex], dev->GetQueue()->GetNBytesTotal(), dev->GetDataRate().GetBitRate());
-			PppHeader ppp;
+			
+			/*PppHeader ppp;
 			Ipv4Header h;
 			p->RemoveHeader(ppp);
 			p->PeekHeader(h);
-			p->AddHeader(ppp);
+			p->AddHeader(ppp);*/
 
+			//printf("Source: %d\n", h.GetSource().Get());
 
-			if(h.GetSource().Get() == 0){
+			/*if(h.GetSource().Get() == 0x0b001001){								//try fived number here too
 				ih->PushHop(Simulator::Now().GetTimeStep(), m_txBytes[ifIndex], dev->GetQueue()->GetNBytesTotal()*2, dev->GetDataRate().GetBitRate());
-			}
+			} else {*/
+				ih->PushHop(Simulator::Now().GetTimeStep(), m_txBytes[ifIndex], dev->GetQueue()->GetNBytesTotal(), dev->GetDataRate().GetBitRate());
+			//}
 
 			}else if (m_ccMode == 10){ // HPCC-PINT
 				uint64_t t = Simulator::Now().GetTimeStep();
