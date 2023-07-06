@@ -88,7 +88,7 @@ if __name__ == "__main__":
                         markersize=0, linewidth=1.5,
                         ylim=(-5, 105),
                         figure_size=(7, 5),
-                        legends=["Flow 0", "Flow 1", "Flow 2", "Flow 3"]) # ["Flow 0", "Flow 1", "Flow 2", "Flow 3", "Flow 4", "Flow 5", "Flow 6", "Flow 7", "Flow 8"]
+                        legends= ["Flow 0", "Flow 1", "Flow 2", "Flow 3", "Flow 4", "Flow 5"]) # ["Flow 0", "Flow 1", "Flow 2", "Flow 3"])
             plotters.draw("line", y_mpd, "./mpd/"+filename+".png", x_axis=x_mpd, 
                         xylabels=["Time (ms)", "MPD (%)"],
                         markersize=0, linewidth=1,
