@@ -239,11 +239,15 @@ void SwitchNode::SwitchNotifyDequeue(uint32_t ifIndex, uint32_t qIndex, Ptr<Pack
 
 			//printf("Source: %d\n", h.GetSource().Get());
 
-			/*if(h.GetSource().Get() == 0x0b001001){								//try fived number here too
+			//std::cout << "IP Address: " << h.GetSource().Get() << std::endl;
+
+			//184569857 or 184550145
+
+			if(h.GetSource().Get() == 184561409){								//try fived number here too
 				ih->PushHop(Simulator::Now().GetTimeStep(), m_txBytes[ifIndex], dev->GetQueue()->GetNBytesTotal()*2, dev->GetDataRate().GetBitRate());
-			} else {*/
+			} else {
 				ih->PushHop(Simulator::Now().GetTimeStep(), m_txBytes[ifIndex], dev->GetQueue()->GetNBytesTotal(), dev->GetDataRate().GetBitRate());
-			//}
+			} 
 
 			}else if (m_ccMode == 10){ // HPCC-PINT
 				uint64_t t = Simulator::Now().GetTimeStep();

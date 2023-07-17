@@ -78,6 +78,22 @@ The major ones are listed here. There could be some files not listed here that a
 
 `applications/model/rdma-client.cc/h`: the application of generating RDMA traffic
 
+## Files added/edited for security test
+
+`run.sh`: easily run experiments. Usage: `./run.sh trace_multi_hop_congestion_small topo_racks_test`
+
+`clean.sh`: remove result files created by experimental run
+
+`src/mix`: various files manipulated to perform experiments
+
+`src/point-to-point/model/rdma-hw.cc`: this is where malicious senders are created
+
+`src/point-to-point/model/switch-node.cc`: this is where switch manipulation is done
+
+`scratch/third.cc`: ip addresses are linearly set here
+
+`simulation/results/draw.py`: modified to graph larger amount of senders
+
 ## Notes on other schemes
 The HPCC and PINT implementations are the same with their simulator [repo](https://github.com/alibaba-edu/High-Precision-Congestion-Control).
 
