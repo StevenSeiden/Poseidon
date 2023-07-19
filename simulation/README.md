@@ -78,7 +78,7 @@ The major ones are listed here. There could be some files not listed here that a
 
 `applications/model/rdma-client.cc/h`: the application of generating RDMA traffic
 
-## Files added/edited for security test
+## Important files added/edited for security test
 
 `run.sh`: easily run experiments. Usage: `./run.sh trace_multi_hop_congestion_small topo_racks_test`
 
@@ -90,7 +90,7 @@ The major ones are listed here. There could be some files not listed here that a
 
 `src/point-to-point/model/switch-node.cc`: this is where switch manipulation is done
 
-`scratch/third.cc`: ip addresses are linearly set here
+`scratch/third.cc`: ip-node association is retrieved here
 
 `simulation/results/draw.py`: modified to graph larger amount of senders
 
