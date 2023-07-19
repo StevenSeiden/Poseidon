@@ -128,7 +128,7 @@ struct FlowInput{
 	uint32_t idx;
 };
 FlowInput flow_input = {0};
-uint32_t flow_num;
+uint32_t flow_num; //amount of flows
 
 void ReadFlowInput(){
 	if (flow_input.idx < flow_num){
@@ -157,7 +157,11 @@ void ScheduleFlowInputs(){
 }
 
 Ipv4Address node_id_to_ip(uint32_t id){
-	return Ipv4Address(0x0b000001 + ((id / 256) * 0x00010000) + ((id % 256) * 0x00000100));
+	Ipv4Address ipAddr = Ipv4Address(0x0b000001 + ((id / 256) * 0x00010000) + ((id % 256) * 0x00000100));
+	//cout << "IP-NODE INFO; NODE: " << id <<  " IP: " <<  ipAddr.Get() << std::endl;
+
+	return ipAddr;
+	//return Ipv4Address(0x0b000001 + ((id / 256) * 0x00010000) + ((id % 256) * 0x00000100));
 }
 
 uint32_t ip_to_node_id(Ipv4Address ip){
@@ -748,6 +752,8 @@ int main(int argc, char *argv[])
 		if (n.Get(i)->GetNodeType() == 0){ // is server
 			serverAddress.resize(i + 1);
 			serverAddress[i] = node_id_to_ip(i);
+			//cout << "IP-NODE INFO; NODE: " << i <<  " IP: " <<  serverAddress[i].Get() << std::endl;
+
 		}
 	}
 
@@ -832,6 +838,11 @@ int main(int argc, char *argv[])
 		// setup PFC trace
 		DynamicCast<QbbNetDevice>(d.Get(0))->TraceConnectWithoutContext("QbbPfc", MakeBoundCallback (&get_pfc, pfc_file, DynamicCast<QbbNetDevice>(d.Get(0))));
 		DynamicCast<QbbNetDevice>(d.Get(1))->TraceConnectWithoutContext("QbbPfc", MakeBoundCallback (&get_pfc, pfc_file, DynamicCast<QbbNetDevice>(d.Get(1))));
+
+		// printing ips and info
+		//cout << "IP-LINK INFO; Node: " << n.Get(i)->GetId() <<  " IP: " <<  serverAddress[src].Get() << std::endl;
+
+
 	}
 
 	nic_rate = get_nic_rate(n);

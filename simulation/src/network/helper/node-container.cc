@@ -87,6 +87,8 @@ NodeContainer::GetN (void) const
 Ptr<Node> 
 NodeContainer::Get (uint32_t i) const
 {
+  //The node number is being returned
+  //std::cout << "m_nodes[i]: " <<  m_nodes[i]->GetId() << std::endl;
   return m_nodes[i];
 }
 void 
